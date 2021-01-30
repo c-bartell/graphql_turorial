@@ -15,6 +15,9 @@ var schema = buildSchema(`
     age: Int
     shark: String
   }
+  type Mutation {
+    updateUser(id: Int!, name: String!, age: String): Person
+  }
 `);
 
 // Sample users
