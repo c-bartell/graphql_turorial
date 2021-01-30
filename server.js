@@ -71,11 +71,24 @@ var retrieveUsers = function(args) {
   }
 };
 
+// Update a user and return new user details
+var updateUser = function({id, name, age}) {
+  users.map(user => {
+    if(user.id === id) {
+      user.name = name;
+      user.age = age;
+      return user;
+    }
+  });
+  return users.filter(user => user.id === id)[0];
+};
+
 // Root resolver
 var root = {
   hello: () => 'Hello world!',
   user: getUser, // Resolver function to return user with specific id
-  users: retrieveUsers
+  users: retrieveUsers,
+  updateUser: updateUser // Include mutation dunction in root resolver
 };
 
 // Create an express server and a GraphQL endpoint
@@ -85,4 +98,5 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true, // Enable GraphiQL when server endpoint is accessed in browser
 }));
+
 app.listen(3000, () => console.log('Now browse to localhost:3000/graphiql'));
