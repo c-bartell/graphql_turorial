@@ -53,12 +53,19 @@ var users = [
 
 // Return a single user
 var getUser = function(args) {
-  // ...
+  var userID = args.id;
+  return users.filter(user => user.id == userID)[0];
 };
 
 // Return a list of users
 var retrieveUsers = function(args) {
-  // ...
+  if (args.shark) {
+    var shark = args.shark;
+    return users.filter(user => user.shark === shark);
+  }
+  else {
+    return users;
+  }
 };
 
 // Root resolver
